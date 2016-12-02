@@ -27,7 +27,7 @@ import org.rebecalang.statespacetransformer.mcrllts.CoreRebecaStateSpaceMcrlLTS;
 import org.rebecalang.statespacetransformer.prism.ProbabilisticRebecaStateSpacePrism;
 import org.rebecalang.statespacetransformer.prism.ProbabilisticTimedRebecaStateSpacePrism;
 import org.xml.sax.helpers.DefaultHandler;
-
+ 
 public class StateSpaceTransformer {
 	
 	private static DefaultHandler getHandler(String output,
