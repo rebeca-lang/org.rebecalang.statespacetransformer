@@ -44,7 +44,7 @@ public class CoreRebecaStateSpaceGraphviz extends AbstractStateSpaceXMLDefaultHa
 			String label = "";
 			String aps = attributes.getValue("atomicpropositions").trim();
 			for (String ap : aps.split(","))
-				label += "\\n" + ap;
+				label += " \\n " + ap;
 			try {
 				String stateId = "S" + attributes.getValue("id");
 				outputFile.writeBytes(stateId + "[label=\"" + "S" + attributes.getValue("id") + ":" + label + "\"];\r\n");

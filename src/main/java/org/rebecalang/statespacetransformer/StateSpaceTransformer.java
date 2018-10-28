@@ -199,15 +199,9 @@ public class StateSpaceTransformer {
 
 			String targetLabel = commandLine.getOptionValue("targetmodel");
 			Set<StateSpaceTransformingFeature> analysisFeatures = new HashSet<StateSpaceTransformingFeature>();
-			if (targetLabel.equals("PRISM")) {
-				analysisFeatures.add(StateSpaceTransformingFeature.PRISM);
-			} else if (targetLabel.equals("GRAPH_VIZ")) {
-				analysisFeatures.add(StateSpaceTransformingFeature.GRAPH_VIZ);
-			} else if (targetLabel.equals("IMCA")) {
-				analysisFeatures.add(StateSpaceTransformingFeature.IMCA);
-			} else if (targetLabel.equals("MCRL_LTS")) {
-				analysisFeatures.add(StateSpaceTransformingFeature.MCRL_LTS);
-			} else {
+			try {
+				analysisFeatures.add(StateSpaceTransformingFeature.valueOf(targetLabel));
+			} catch (IllegalArgumentException e) {
 				throw new ParseException("Unrecognized target analysis: " + extensionLabel);
 			}
 
@@ -223,7 +217,6 @@ public class StateSpaceTransformer {
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp("StateSpaceAnalyzer [options]", options);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			System.out.println("Unexpected exception: " + e.getMessage());
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp("StateSpaceAnalyzer [options]", options);
