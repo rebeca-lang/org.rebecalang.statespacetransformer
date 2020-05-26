@@ -18,6 +18,10 @@ jobs: # a collection of steps
       # - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
       #     key: compiler
 
+      - run: git clone https://github.com/rebeca-lang/org.rebecalang.compiler
+      - run: mvn -f org.rebecalang.compiler/pom.xml clean install
+      - run: rm -f -r org.rebecalang.compiler
+
       - run: mvn clean package -Pexecutable # run the actual tests
 
       # - save_cache: # saves the project dependencies
