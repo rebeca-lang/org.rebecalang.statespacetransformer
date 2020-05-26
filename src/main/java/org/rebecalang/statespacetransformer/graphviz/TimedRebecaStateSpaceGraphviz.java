@@ -43,7 +43,7 @@ public class TimedRebecaStateSpaceGraphviz extends
 			String qName) throws SAXException {
 		if (qName.equalsIgnoreCase(TRANSITION)) {
 			try {
-				String label = " \\n @(" + execTime + ">>" + shiftTime + ")";
+				String label = " \\n @" + execTime + " -> +" + shiftTime;
 				if (timedTR) {
 					label += "\", style=\"bold\", color=\"red";
 					timedTR = false;
