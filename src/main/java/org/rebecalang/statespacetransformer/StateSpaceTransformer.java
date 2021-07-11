@@ -17,7 +17,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.rebecalang.compiler.utils.CompilerFeature;
+import org.rebecalang.compiler.utils.CompilerExtension;
 import org.rebecalang.statespacetransformer.graphviz.CoreRebecaStateSpaceGraphviz;
 import org.rebecalang.statespacetransformer.graphviz.ProbabilisticTimedRebecaStateSpaceGraphviz;
 import org.rebecalang.statespacetransformer.graphviz.TimedRebecaStateSpaceGraphviz;
@@ -31,11 +31,11 @@ import org.xml.sax.helpers.DefaultHandler;
 public class StateSpaceTransformer {
 	
 	private static DefaultHandler getHandler(String output,
-			Set<CompilerFeature> compilerFeatures,
+			Set<CompilerExtension> compilerFeatures,
 			Set<StateSpaceTransformingFeature> analysisFeatures, String additionalFiles) throws Exception {
 		if (analysisFeatures.contains(StateSpaceTransformingFeature.GRAPH_VIZ)) {
-			if (compilerFeatures.contains(CompilerFeature.TIMED_REBECA)) {
-				if (compilerFeatures.contains(CompilerFeature.PROBABILISTIC_REBECA))
+			if (compilerFeatures.contains(CompilerExtension.TIMED_REBECA)) {
+				if (compilerFeatures.contains(CompilerExtension.PROBABILISTIC_REBECA))
 					return new ProbabilisticTimedRebecaStateSpaceGraphviz(output, analysisFeatures);
 				else
 					return new TimedRebecaStateSpaceGraphviz(output, analysisFeatures);
@@ -43,17 +43,17 @@ public class StateSpaceTransformer {
 				return new CoreRebecaStateSpaceGraphviz(output, analysisFeatures);
 			}
 		} else if (analysisFeatures.contains(StateSpaceTransformingFeature.MCRL_LTS)) {
-			if (compilerFeatures.contains(CompilerFeature.TIMED_REBECA) || 
-					compilerFeatures.contains(CompilerFeature.PROBABILISTIC_REBECA)) {
+			if (compilerFeatures.contains(CompilerExtension.TIMED_REBECA) || 
+					compilerFeatures.contains(CompilerExtension.PROBABILISTIC_REBECA)) {
 				throw new Exception("Only state spaces of core Rebeca models can be transformed to mcrl input.");
 			} else {
 				return new CoreRebecaStateSpaceMcrlLTS(output, analysisFeatures);
 			}
 		} else if (analysisFeatures.contains(StateSpaceTransformingFeature.PRISM)) {
-			if (!compilerFeatures.contains(CompilerFeature.PROBABILISTIC_REBECA)) {
+			if (!compilerFeatures.contains(CompilerExtension.PROBABILISTIC_REBECA)) {
 				throw new Exception("Only state spaces of probabilistic models can be transformed to PRISM input.");
 			} else {
-				if (compilerFeatures.contains(CompilerFeature.TIMED_REBECA)) {
+				if (compilerFeatures.contains(CompilerExtension.TIMED_REBECA)) {
 					Set<String> obv = new HashSet<String>();
 					if (additionalFiles != null) {
 						RandomAccessFile observableVariables = new RandomAccessFile(additionalFiles, "r");
@@ -72,7 +72,7 @@ public class StateSpaceTransformer {
 				}
 			}
 		} else if (analysisFeatures.contains(StateSpaceTransformingFeature.IMCA)) {
-			if (!(compilerFeatures.contains(CompilerFeature.PROBABILISTIC_REBECA) && compilerFeatures.contains(CompilerFeature.TIMED_REBECA))) {
+			if (!(compilerFeatures.contains(CompilerExtension.PROBABILISTIC_REBECA) && compilerFeatures.contains(CompilerExtension.TIMED_REBECA))) {
 				throw new Exception("Only state spaces of probabilistic timed models can be transformed to IMCA input.");
 			} else {
 
@@ -183,16 +183,16 @@ public class StateSpaceTransformer {
 			} else {
 				extensionLabel = "CoreRebeca";
 			}
-			Set<CompilerFeature> compilerFeatures = new HashSet<CompilerFeature>();
+			Set<CompilerExtension> compilerFeatures = new HashSet<CompilerExtension>();
 			if (extensionLabel.equals("CoreRebeca")) {
 				//Do nothing!
 			} else if (extensionLabel.equals("TimedRebeca")) {
-				compilerFeatures.add(CompilerFeature.TIMED_REBECA);
+				compilerFeatures.add(CompilerExtension.TIMED_REBECA);
 			} else if (extensionLabel.equals("ProbabilisticRebeca")) {
-				compilerFeatures.add(CompilerFeature.PROBABILISTIC_REBECA);
+				compilerFeatures.add(CompilerExtension.PROBABILISTIC_REBECA);
 			} else if (extensionLabel.equals("ProbabilisticTimedRebeca")) {
-				compilerFeatures.add(CompilerFeature.PROBABILISTIC_REBECA);
-				compilerFeatures.add(CompilerFeature.TIMED_REBECA);
+				compilerFeatures.add(CompilerExtension.PROBABILISTIC_REBECA);
+				compilerFeatures.add(CompilerExtension.TIMED_REBECA);
 			} else {
 				throw new ParseException("Unrecognized Rebeca extension: " + extensionLabel);
 			}

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -17,8 +18,6 @@ import org.rebecalang.statespacetransformer.AbstractStateSpaceXMLDefaultHandler;
 import org.rebecalang.statespacetransformer.StateSpaceTransformingFeature;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 
 public class ProbabilisticRebecaStateSpaceIMCA extends AbstractStateSpaceXMLDefaultHandler {
 	

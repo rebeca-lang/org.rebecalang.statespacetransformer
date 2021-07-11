@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +15,6 @@ import org.rebecalang.statespacetransformer.AbstractStateSpaceXMLDefaultHandler;
 import org.rebecalang.statespacetransformer.StateSpaceTransformingFeature;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class ProbabilisticRebecaStateSpacePrism extends AbstractStateSpaceXMLDefaultHandler {
 	
