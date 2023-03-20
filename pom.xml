@@ -7,7 +7,7 @@
 	<version>1.0.1</version>
 	
 	<properties>
-		<compilerversion>14</compilerversion>
+		<compilerversion>17</compilerversion>
 	</properties>
 	
 	<dependencies>
