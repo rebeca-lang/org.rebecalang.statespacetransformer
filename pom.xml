@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.rebecalang</groupId>
 	<artifactId>statespacetransformer</artifactId>
-	<version>1.0.1</version>
+	<version>1.2</version>
 	
 	<properties>
-		<compilerversion>17</compilerversion>
+		<compilerversion>21</compilerversion>
 	</properties>
 	
 	<dependencies>
